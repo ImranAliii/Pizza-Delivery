@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="image library/pngegg.png" type="image/x-icon">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Pizza-E</title>
+  <style>
+
+
+   .banner-container {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+      margin-top: 0; /* Adjust this value to create space between the navigation bar and the banner */
+    }
+
+    .banner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease-in-out;
+      display: flex;
+      align-items: center;
+    }
+
+    .sticky-nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 9999;
+    }
+    .cart-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+
+
+  </style>
+  <style>
+    /* Your existing CSS styles remain the same */
+
+    .cart-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+  
+    #cartPopup {
+display: none;
+position: absolute;
+top: 120%;
+right: 0;
+background-color: white;
+border: 1px solid #ccc;
+box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+padding: 10px;
+z-index: 1000;
+max-height: 400px;
+overflow-y: auto;
+}
+
+  
+      #checkout-button,
+    .remove-button {
+      /* Style your checkout and remove buttons here */
+      display: inline-block;
+      padding: 6px 12px; /* Adjust padding as needed */
+      background-color: #f30f0f; /* Change to your desired button color */
+      color: #fff;
+      font-size: 14px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+      #checkout-button:hover {
+        background-color: #e1ff01; /* Slightly darker green on hover */
+      }
+    
+      #clear-cart-button {
+        /* Style your clear cart button here */
+        display: block; /* Make sure it's visible */
+        background-color: #ff6347; /* Tomato red color */
+        color: white;
+        padding: 10px 20px;
+        font-weight: bold;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        margin: 20px 0;
+      }
+    
+      #clear-cart-button:hover {
+        background-color: #ff4a36; /* Slightly darker red on hover */
+      }
+  
+
+  
+
+      /* Overall Styles */
+body {
+  font-family: Arial, sans-serif; /* Use your preferred font stack */
+  font-size: 16px; /* Use your preferred base font size */
+  color: #333; /* Use your preferred text color */
+  background-color: #fff; /* Use your preferred background color */
+}
+
+/* Add white space and separation between sections */
+.section {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc; /* Add a border for separation */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+}
+
+/* Additional space and separation for specific sections */
+.menu, .deals {
+  margin: 40px;
+}
+
+/* Consistent link styles with your color palette */
+a {
+  text-decoration: none;
+  color: #0077B5; /* Use your preferred link color */
+}
+
+a:hover {
+  text-decoration: underline;
+}
+/* Cart Container Styles */
+
+/* Cart Items Styles */
+
+
+.cart-item {
+  padding: 10px;
+  border: 1px solid #ccc; /* Add a border for separation */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+}
+
+.cart-item .price {
+  color: #ff5722; /* Use your preferred price color */
+}
+
+/* Checkout Button Styles */
+#checkout-button {
+  display: block; /* Make the button visible */
+  width: 150px; /* Adjust the width as needed */
+  height: 40px; /* Adjust the height as needed */
+  background-color: #ff5722; /* Change to your desired button color */
+  color: #fff; /* Use your preferred text color */
+  font-size: 18px; /* Adjust the font size as needed */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+/* Clear Cart Button Styles */
+#clear-cart-button {
+  display: block; /* Make the button visible */
+  width: 150px; /* Adjust the width as needed */
+  height: 40px; /* Adjust the height as needed */
+  background-color: #ff5722; /* Change to your desired button color */
+  color: #fff; /* Use your preferred text color */
+  font-size: 18px; /* Adjust the font size as needed */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 20px 0;
+}
+
+    </style>
+    
+</head>
+<body>
+  <nav class="sticky-nav bg-gradient-to-r from-red-400 via-black-500 to-green-400 py-1">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between h-16">
+        <div class="fixed left-0">
+     
+          
+          <a class="rounded-full flex items-center justify-start w-10 hover:scale-150" href="#">
+            <img src="image library/pngegg.png" alt="Logo">
+          </a>
+        </div>
+        <div class="flex items-center justify-center flex-grow space-x-5 hover:text-opacity-100">
+          <button class="ml-2 flex items-center mr-4 text-white hover:text-black-400 hover:text-xl transition duration-300 relative font-bold hover:font-extrabold">
+            <span class="mr-1 menu-button">Menu</span>
+            <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M6 8l4 4 4-4"></path>
+            </svg>
+          </button>
+          <button class="ml-2 flex items-center mr-4 text-white hover:text-green-400 hover:text-xl transition duration-300 relative font-bold hover:font-extrabold">
+            <span class="mr-1 deal-button">Deals</span>
+            <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M6 8l4 4 4-4"></path>
+            </svg>
+          </button>
+  
+          <a href="#" class="mr-4 text-white hover:text-orange-400.hover:text-xl transition duration-300 relative font-bold hover:font-extrabold">
+            Contact
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-orange-400 transform scale-x-0 transition-transform duration-300 origin-left"></span>
+          </a>
+        </div>
+        <!-- Update the IDs for the cart and checkout buttons -->
+<a id="cartButton" href="#" class="mr-4 text-white hover:text-orange-400 hover:text-xl transition duration-300 relative font-bold hover:font-extrabold">
+  <img class="h-10 hover:scale-105" src="image library/cart.png.svg" alt="Cart">
+  <span class="absolute bottom-0 left-0 w-full h-0.5 bg-orange-400 transform scale-x-0 transition-transform duration-300 origin-left"></span>
+  <span id="cartCounter" class="absolute top-0 right-0 bg-red-500 text-white text-xs px-2 py-1 rounded-full">0</span>
+</a>
+<!-- Update the cartPopup and checkout button with initial style -->
+<div id="cartPopup" class="cartPopup hidden">
+  <div class="cartItems">
+    <!-- Cart items will be displayed here -->
+  </div>
+  <button id="checkout-button" style="display: none;" class="bg-green-500 hover:bg-orange-400 text-white px-4 py-2 rounded-full font-bold cart-button">Checkout</button>
+  <button id="clear-cart-button" style="display: none;" class="bg-red-500 hover:bg-orange-400 text-white px-4 py-2 rounded-full font-bold cart-button">Clear Cart</button>
+</div>
+
+
+        
+      </div>
+    </div>
+  </nav>
+  <div id="menuDrawer" class="hidden bg-white w-64 h-screen fixed top-0 right-0 overflow-y-auto shadow-lg">
+    <!-- Add your navigation links or menu items here -->
+    <ul class="p-4">
+      <li><a href="#">Item 1</a></li>
+      <li><a href="#">Item 2</a></li>
+      <li><a href="#">Item 3</a></li>
+      <!-- Add more items as needed -->
+    </ul>
+  </div>
+  
+  <div class="banner-container rounded-lg">
+    <div class="banner">
+      <img src="image library/banner1.jpg" alt="">
+    </div>
+    <div class="banner">
+      <img src="image library/banner2.jpg" alt="">
+    </div>
+  </div>
+ 
+  <section class="menu mt-16">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-center mb-10 ">
+        <h2 class="text-3xl font-bold ">Our Menu</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="bg-white rounded-lg shadow-lg col-span-1 transform transition-all hover:scale-105">
+         
+        <!-- Add this HTML code to each menu item -->
+  <img src="image library/pizza2.jpg" alt="Pizza" class="rounded-t-lg w-full h-48 object-cover">
+  <div class="p-6">
+    <h3 class="text-xl font-bold mb-2">Margherita</h3>
+    <p class="text-gray-700">Classic cheese pizza topped with tomato sauce, mozzarella, and fresh basil.</p>
+    <div class="flex justify-between items-center mt-4">
+      <span class="font-bold text-base bg-green-300 px-2 rounded-2xl"> 800 PKR </span>
+      <button class="bg-orange-500 hover:bg-orange-400 text-white px-2  rounded-sm font-normal">Add to Cart</button>
+      <!-- Add the favorites heart icon here -->
+<svg class="h-6 w-6 fill-current text-gray-200 cursor-pointer ml-2 heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+  <path d="M10 17.5l-1.45-1.32C5.4 14.23 2 11.36 2 8.5 2 6.02 4.02 4 6.5 4c1.74 0 3.41.81 4.5 2.09C11.09 4.81 12.76 4 14.5 4 17.48 4 20 6.52 20 8.5c0 2.86-3.4 5.73-6.55 7.68L10 17.5z" />
+</svg>
+
+    </div>
+  </div>
+</div>
+
+       
+        
+       <!-- Add this HTML code to each menu item -->
+<div class="bg-white rounded-lg shadow-lg col-span-1 transform transition-all hover:scale-105">
+  <img src="image library/pizza2.jpg" alt="Pizza" class="rounded-t-lg w-full h-48 object-cover">
+  <div class="p-6">
+    <h3 class="text-xl font-bold mb-2">Margherita</h3>
+    <p class="text-gray-700">Classic cheese pizza topped with tomato sauce, mozzarella, and fresh basil.</p>
+    <div class="flex justify-between items-center mt-4">
+      <span class="font-bold text-base bg-green-300 px-2 rounded-2xl"> 800 PKR </span>
+      <button class="bg-orange-500 hover:bg-orange-400 text-white px-2  rounded-sm font-normal">Add to Cart</button>
+      <!-- Add the favorites heart icon here -->
+<svg class="h-6 w-6 fill-current text-gray-200 cursor-pointer ml-2 heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+  <path d="M10 17.5l-1.45-1.32C5.4 14.23 2 11.36 2 8.5 2 6.02 4.02 4 6.5 4c1.74 0 3.41.81 4.5 2.09C11.09 4.81 12.76 4 14.5 4 17.48 4 20 6.52 20 8.5c0 2.86-3.4 5.73-6.55 7.68L10 17.5z" />
+</svg>
+
+    </div>
+  </div>
+</div>
+
+        <!-- Add this HTML code to each menu item -->
+<div class="bg-white rounded-lg shadow-lg col-span-1 transform transition-all hover:scale-105">
+  <img src="image library/pizza2.jpg" alt="Pizza" class="rounded-t-lg w-full h-48 object-cover">
+  <div class="p-6">
+    <h3 class="text-xl font-bold mb-2">Margherita</h3>
+    <p class="text-gray-700">Classic cheese pizza topped with tomato sauce, mozzarella, and fresh basil.</p>
+    <div class="flex justify-between items-center mt-4">
+      <span class="font-bold text-base bg-green-300 px-2 rounded-2xl"> 800 PKR </span>
+      <button class="bg-orange-500 hover:bg-orange-400 text-white px-2  rounded-sm font-normal">Add to Cart</button>
+      <!-- Add the favorites heart icon here -->
+<svg class="h-6 w-6 fill-current text-gray-200 cursor-pointer ml-2 heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+  <path d="M10 17.5l-1.45-1.32C5.4 14.23 2 11.36 2 8.5 2 6.02 4.02 4 6.5 4c1.74 0 3.41.81 4.5 2.09C11.09 4.81 12.76 4 14.5 4 17.48 4 20 6.52 20 8.5c0 2.86-3.4 5.73-6.55 7.68L10 17.5z" />
+</svg>
+
+    </div>
+  </div>
+</div>
+
+       <!-- Add this HTML code to each menu item -->
+<div class="bg-white rounded-lg shadow-lg col-span-1 transform transition-all hover:scale-105">
+  <img src="image library/pizza2.jpg" alt="Pizza" class="rounded-t-lg w-full h-48 object-cover">
+  <div class="p-6">
+    <h3 class="text-xl font-bold mb-2">Margherita</h3>
+    <p class="text-gray-700">Classic cheese pizza topped with tomato sauce, mozzarella, and fresh basil.</p>
+    <div class="flex justify-between items-center mt-4">
+      <span class="font-bold text-base bg-green-300 px-2 rounded-2xl"> 800 PKR </span>
+      <button class="bg-orange-500 hover:bg-orange-400 text-white px-2  rounded-sm font-normal">Add to Cart</button>
+      <!-- Add the favorites heart icon here -->
+<svg class="h-6 w-6 fill-current text-gray-200 cursor-pointer ml-2 heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+  <path d="M10 17.5l-1.45-1.32C5.4 14.23 2 11.36 2 8.5 2 6.02 4.02 4 6.5 4c1.74 0 3.41.81 4.5 2.09C11.09 4.81 12.76 4 14.5 4 17.48 4 20 6.52 20 8.5c0 2.86-3.4 5.73-6.55 7.68L10 17.5z" />
+</svg>
+
+    </div>
+  </div>
+</div>
+
+        <!-- Add this HTML code to each menu item -->
+<div class="bg-white rounded-lg shadow-lg col-span-1 transform transition-all hover:scale-105">
+  <img src="image library/pizza2.jpg" alt="Pizza" class="rounded-t-lg w-full h-48 object-cover">
+  <div class="p-6">
+    <h3 class="text-xl font-bold mb-2">Margherita</h3>
+    <p class="text-gray-700">Classic cheese pizza topped with tomato sauce, mozzarella, and fresh basil.</p>
+    <div class="flex justify-between items-center mt-4">
+      <span class="font-bold text-base bg-green-300 px-2 rounded-2xl"> 800 PKR </span>
+      <button class="bg-orange-500 hover:bg-orange-400 text-white px-2  rounded-sm font-normal">Add to Cart</button>
+      <!-- Add the favorites heart icon here -->
+<svg class="h-6 w-6 fill-current text-gray-200 cursor-pointer ml-2 heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+  <path d="M10 17.5l-1.45-1.32C5.4 14.23 2 11.36 2 8.5 2 6.02 4.02 4 6.5 4c1.74 0 3.41.81 4.5 2.09C11.09 4.81 12.76 4 14.5 4 17.48 4 20 6.52 20 8.5c0 2.86-3.4 5.73-6.55 7.68L10 17.5z" />
+</svg>
+
+    </div>
+  </div>
+</div>
+
+       <!-- Add this HTML code to each menu item -->
+<div class="bg-white rounded-lg shadow-lg col-span-1 transform transition-all hover:scale-105">
+  <img src="image library/pizza2.jpg" alt="Pizza" class="rounded-t-lg w-full h-48 object-cover">
+  <div class="p-6">
+    <h3 class="text-xl font-bold mb-2">Margherita</h3>
+    <p class="text-gray-700">Classic cheese pizza topped with tomato sauce, mozzarella, and fresh basil.</p>
+    <div class="flex justify-between items-center mt-4">
+      <span class="font-bold text-base bg-green-300 px-2 rounded-2xl"> 800 PKR </span>
+      <button class="bg-orange-500 hover:bg-orange-400 text-white px-2  rounded-sm font-normal">Add to Cart</button>
+      <!-- Add the favorites heart icon here -->
+<svg class="h-6 w-6 fill-current text-gray-200 cursor-pointer ml-2 heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+  <path d="M10 17.5l-1.45-1.32C5.4 14.23 2 11.36 2 8.5 2 6.02 4.02 4 6.5 4c1.74 0 3.41.81 4.5 2.09C11.09 4.81 12.76 4 14.5 4 17.48 4 20 6.52 20 8.5c0 2.86-3.4 5.73-6.55 7.68L10 17.5z" />
+</svg>
+
+    </div>
+  </div>
+</div>
+
+        <!-- Add this HTML code to each menu item -->
+<div class="bg-white rounded-lg shadow-lg col-span-1 transform transition-all hover:scale-105">
+  <img src="image library/pizza2.jpg" alt="Pizza" class="rounded-t-lg w-full h-48 object-cover">
+  <div class="p-6">
+    <h3 class="text-xl font-bold mb-2">Margherita</h3>
+    <p class="text-gray-700">Classic cheese pizza topped with tomato sauce, mozzarella, and fresh basil.</p>
+    <div class="flex justify-between items-center mt-4">
+      <span class="font-bold text-base bg-green-300 px-2 rounded-2xl"> 800 PKR </span>
+      <button class="bg-orange-500 hover:bg-orange-400 text-white px-2  rounded-sm font-normal">Add to Cart</button>
+      <!-- Add the favorites heart icon here -->
+<svg class="h-6 w-6 fill-current text-gray-200 cursor-pointer ml-2 heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+  <path d="M10 17.5l-1.45-1.32C5.4 14.23 2 11.36 2 8.5 2 6.02 4.02 4 6.5 4c1.74 0 3.41.81 4.5 2.09C11.09 4.81 12.76 4 14.5 4 17.48 4 20 6.52 20 8.5c0 2.86-3.4 5.73-6.55 7.68L10 17.5z" />
+</svg>
+
+    </div>
+  </div>
+</div>
+
+        <!-- Add this HTML code to each menu item -->
+<div class="bg-white rounded-lg shadow-lg col-span-1 transform transition-all hover:scale-105">
+  <img src="image library/pizza2.jpg" alt="Pizza" class="rounded-t-lg w-full h-48 object-cover">
+  <div class="p-6">
+    <h3 class="text-xl font-bold mb-2">Margherita</h3>
+    <p class="text-gray-700">Classic cheese pizza topped with tomato sauce, mozzarella, and fresh basil.</p>
+    <div class="flex justify-between items-center mt-4">
+      <span class="font-bold text-base bg-green-300 px-2 rounded-2xl"> 800 PKR </span>
+      <button class="bg-orange-500 hover:bg-orange-400 text-white px-2  rounded-sm font-normal">Add to Cart</button>
+      <!-- Add the favorites heart icon here -->
+<svg class="h-6 w-6 fill-current text-gray-200 cursor-pointer ml-2 heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+  <path d="M10 17.5l-1.45-1.32C5.4 14.23 2 11.36 2 8.5 2 6.02 4.02 4 6.5 4c1.74 0 3.41.81 4.5 2.09C11.09 4.81 12.76 4 14.5 4 17.48 4 20 6.52 20 8.5c0 2.86-3.4 5.73-6.55 7.68L10 17.5z" />
+</svg>
+
+    </div>
+  </div>
+</div>
+
+      </div>
+    </div>
+  </section>
+  
+  <section class="deals py-16">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-center mb-10">
+        <h2 class="text-3xl font-bold">Special Deals</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-lg shadow-lg">
+          <img src="image library/meal3.jpg" alt="Deal" class="rounded-t-lg w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Family Pack</h3>
+            <p class="text-gray-700">Get 2 large pizzas, 1 side, and 2 drinks for only $29.99.</p>
+            <div class="flex justify-between items-center mt-4">
+              <a href="#" class="bg-orange-500 hover:bg-orange-400 text-white px-4 py-1 rounded-full font-bold">Order</a>
+              <a href="#" class="bg-orange-500 hover:bg-orange-400 text-white px-4 pu-1 rounded-full font-bold">Add To Cart</a>
+              <!-- Add the favorites heart icon here -->
+<svg class="h-6 w-6 fill-current text-gray-200 cursor-pointer ml-2 heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+  <path d="M10 17.5l-1.45-1.32C5.4 14.23 2 11.36 2 8.5 2 6.02 4.02 4 6.5 4c1.74 0 3.41.81 4.5 2.09C11.09 4.81 12.76 4 14.5 4 17.48 4 20 6.52 20 8.5c0 2.86-3.4 5.73-6.55 7.68L10 17.5z" />
+</svg>
+
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg">
+          <img src="image library/meal1.jpg" alt="Deal" class="rounded-t-lg w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Lunch Special</h3>
+            <p class="text-gray-700">Enjoy a personal pizza with a side and a drink for only $9.99.</p>
+            <div class="flex justify-between items-center mt-4">
+              <a href="#" class="bg-orange-500 hover:bg-orange-400 text-white px-4 py-1 rounded-full font-bold">Order</a>
+              <a href="#" class="bg-orange-500 hover:bg-orange-400 text-white px-4 pu-1 rounded-full font-bold">Add To Cart</a>
+              <!-- Add the favorites heart icon here -->
+<svg class="h-6 w-6 fill-current text-gray-200 cursor-pointer ml-2 heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+  <path d="M10 17.5l-1.45-1.32C5.4 14.23 2 11.36 2 8.5 2 6.02 4.02 4 6.5 4c1.74 0 3.41.81 4.5 2.09C11.09 4.81 12.76 4 14.5 4 17.48 4 20 6.52 20 8.5c0 2.86-3.4 5.73-6.55 7.68L10 17.5z" />
+</svg>
+
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg">
+          <img src="image library/meal2.jpg" alt="Deal" class="rounded-t-lg w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Party Pack</h3>
+            <p class="text-gray-700">Get 4 large pizzas, 2 sides, and 4 drinks for only $49.99.</p>
+            <div class="flex justify-between items-center mt-4">
+              <a href="#" class="bg-orange-500 hover:bg-orange-400 text-white px-4 py-1 rounded-full font-bold">Order</a>
+              <a href="#" class="bg-orange-500 hover:bg-orange-400 text-white px-4 pu-1 rounded-full font-bold">Add To Cart</a>
+              <!-- Add the favorites heart icon here -->
+<svg class="h-6 w-6 fill-current text-gray-200 cursor-pointer ml-2 heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+  <path d="M10 17.5l-1.45-1.32C5.4 14.23 2 11.36 2 8.5 2 6.02 4.02 4 6.5 4c1.74 0 3.41.81 4.5 2.09C11.09 4.81 12.76 4 14.5 4 17.48 4 20 6.52 20 8.5c0 2.86-3.4 5.73-6.55 7.68L10 17.5z" />
+</svg>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+    <footer class="bg-gray-900 text-white py-10">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="space-y-4">
+          <h3 class="text-lg font-bold">About Us</h3>
+          <p class="text-gray-400">Pizza-E is a leading pizza restaurant specializing in delicious and freshly made pizzas.</p>
+        </div>
+        <div class="space-y-4">
+          <h3 class="text-lg font-bold">Menu</h3>
+          <ul class="text-gray-400">
+            <li><a href="#" class="hover:text-white">Margherita</a></li>
+            <li><a href="#" class="hover:text-white">Pepperoni</a></li>
+            <li><a href="#" class="hover:text-white">Supreme</a></li>
+          </ul>
+        </div>
+        <div class="space-y-4">
+          <h3 class="text-lg font-bold">Deals</h3>
+          <ul class="text-gray-400">
+            <li><a href="#" class="hover:text-white">Family Pack</a></li>
+            <li><a href="#" class="hover:text-white">Lunch Special</a></li>
+            <li><a href="#" class="hover:text-white">Party Pack</a></li>
+          </ul>
+        </div>
+        <div class="space-y-4">
+          <h3 class="text-lg font-bold">Contact Us</h3>
+          <p class="text-gray-400">123 Pizza Street, City</p>
+          <p class="text-gray-400">Phone: 123-456-7890</p>
+          <p class="text-gray-400">Email: info@pizzae.com</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-8">
+      <p class="text-gray-400">© 2023 Pizza-E. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+  <script>
+    const banners = document.querySelectorAll('.banner');
+    let currentBannerIndex = 0;
+
+    function swipeBanners() {
+      banners[currentBannerIndex].style.transform = 'translateX(-100%)';
+      currentBannerIndex = (currentBannerIndex + 1) % banners.length;
+      banners[currentBannerIndex].style.transform = 'translateX(0)';
+    }
+
+    setInterval(swipeBanners, 3000);
+
+    window.onscroll = function() {
+      stickyNav();
+    };
+
+    var navbar = document.querySelector(".sticky-nav");
+    var sticky = navbar.offsetTop;
+
+    function stickyNav() {
+      if (window.pageYOffset >= sticky) {
+        navbar.classList.add("sticky");
+      } else {
+        navbar.classList.remove("sticky");
+      }
+    }
+  </script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const addToCartButtons = document.querySelectorAll('.bg-orange-500');
+    const cartCounter = document.getElementById('cartCounter');
+    const cartButton = document.getElementById('cartButton');
+    const cartPopup = document.getElementById('cartPopup');
+    const cartItems = document.querySelector('.cartItems');
+    const checkoutButton = document.querySelector('.cart-button#checkout-button');
+    const clearCartButton = document.querySelector('#clear-cart-button');
+    let cartCount = 0;
+    
+    addToCartButtons.forEach(addToCartButton => {
+      addAddToCartClickListener(addToCartButton);
+    });
+  
+    function addAddToCartClickListener(button) {
+      button.addEventListener('click', (event) => {
+        if (event.target.tagName === 'BUTTON' && event.target.textContent === 'Add to Cart') {
+          // Clone the item and add it to the cart popup
+          const item = button.parentElement.parentElement;
+          const itemClone = item.cloneNode(true);
+          cartItems.appendChild(itemClone);
+  
+          const removeButton = createRemoveButton(); // Create a "Remove" button
+          itemClone.appendChild(removeButton);
+  
+          addRemoveClickListener(removeButton); // Add a click event to the "Remove" button
+  
+          cartCount++;
+          cartCounter.innerText = cartCount;
+          console.log('running');
+          updateCartButtonsVisibility();
+          event.stopPropagation();
+        }
+      });
+    }
+    function updateCartButtonsVisibility() {
+    const checkoutButton = document.getElementById('checkout-button');
+    const clearCartButton = document.getElementById('clear-cart-button');
+
+    if (cartCount > 0) {
+      checkoutButton.style.display = 'block'; // Show the checkout button
+      clearCartButton.style.display = 'block'; // Show the clear cart button
+    } else {
+      checkoutButton.style.display = 'none'; // Hide the checkout button
+      clearCartButton.style.display = 'none'; // Hide the clear cart button
+    }
+  }
+  
+
+    function createRemoveButton() {
+      const removeButton = document.createElement('button');
+      removeButton.textContent = 'Remove';
+      removeButton.classList.add('bg-red-500', 'hover:bg-orange-400', 'text-white', 'px-4', 'py-2', 'rounded-full', 'font-bold');
+      return removeButton;
+    }
+  
+    function addRemoveClickListener(removeButton) {
+      removeButton.addEventListener('click', () => {
+        const item = removeButton.parentElement;
+        cartItems.removeChild(item);
+        cartCount--;
+        cartCounter.innerText = cartCount;
+      });
+    }
+    function hidePopup() {
+      if (cartCount <= 0) {
+        hideCartPopup();
+    } 
+    else {
+    showCartPopup();
+    }
+}
+
+    cartButton.addEventListener('click', function (event) {
+      event.preventDefault();
+  
+      // Toggle the cartPopup visibility
+      if (cartPopup.style.display === 'block'|| cartCount===0) {
+        hideCartPopup();
+      } else {
+        showCartPopup();
+      }
+    });
+  
+    function showCartPopup() {
+      cartPopup.style.display = 'block';
+    }
+  
+    function hideCartPopup() {
+      cartPopup.style.display = 'none';
+    }
+  
+    checkoutButton.addEventListener('click', function (event) {
+      event.preventDefault();
+      // Add logic to handle the checkout process here
+      // You can reset cartCount to 0 if needed
+    });
+  
+    clearCartButton.addEventListener('click', function () {
+      cartItems.innerHTML = ''; // Clear all items from the cart
+      cartCount = 0;
+      cartCounter.innerText = cartCount;
+    });
+  
+    cartPopup.addEventListener('click', function (event) {
+      event.stopPropagation();
+    });
+  });
+  </script>
+  
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const hearts = document.querySelectorAll('.heart');
+
+    function toggleHeartColor(heart) {
+      heart.addEventListener('click', () => {
+        heart.classList.toggle('text-red-300');
+      });
+    }     
+
+    hearts.forEach(heart => {
+      toggleHeartColor(heart);
+    });
+  });
+</script>
+<script>
+    let isCartEmpty = true; // Initially, the cart is empty
+
+// ...
+
+function showCartPopup() {
+  cartPopup.style.display = 'block';
+
+  // Check if the cart is empty
+  if (cartCount > 0) {
+    isCartEmpty = false;
+    checkoutButton.style.display = 'block';
+    clearCartButton.style.display = 'block';
+  }
+}
+
+function hideCartPopup() {
+  cartPopup.style.display = 'none';
+}
+
+checkoutButton.addEventListener('click', function (event) {
+  event.preventDefault();
+  // Perform the checkout action here
+});
+
+// Add the event listener for the "Clear Cart" button
+clearCartButton.addEventListener('click', function (event) {
+  event.preventDefault();
+  clearCart();
+});
+
+// Function to clear the cart
+function clearCart() {
+  // Remove all items from the cart
+  cartItems.innerHTML = '';
+  cartCount = 0;
+  cartCounter.innerText = cartCount;
+  isCartEmpty = true;
+
+  // Hide the "Checkout" and "ClearCart" buttons
+  checkoutButton.style.display = 'none';
+  clearCartButton.style.display = 'none';
+
+  hideCartPopup();
+}
+
+cartButton.addEventListener('click', function (event) {
+  event.preventDefault();
+
+  if (!isCartEmpty) {
+    showCartPopup();
+  }
+});
+</script>
+
+
+
+
+
+  
+  
+
+  
+</html>

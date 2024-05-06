@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="Image library/pizza-icon.png" type="image/x-icon">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Pizza-E</title>
+</head>
+<body>
+  <div class="background-image-example">
+    <h1 class="text-white font-extrabold shadow-black flex justify-center py-40 text-7xl hover:text-8xl hover:text-yellow-200">Order Delicious Pizza</h1>
+    <div class="container">
+      <div class="max-w-3xl mx-auto text-center">
+        <a href="#" class="bg-orange-500 hover:bg-orange-400 hover:text-3xl sha text-white px-6 py-3 rounded-full font-bold text-xl transition duration-300">Order Now</a>
+      </div>
+    </div>
+  </div>
+
+  <nav class="sticky-nav bg-gradient-to-r from-red-400 via-yellow-500 to-green-400 py-1">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center">
+          <a class="px-1 rounded-full justify-start w-10 hover:scale-150" href="#">
+            <img src="Image library/pizza-icon.png" alt="Logo">
+          </a>
+        </div>
+        <div class="flex items-center justify-center flex-grow space-x-5 hover:text-opacity-100">
+          <a href="#" class="mr-4 text-white hover:text-green-400 hover:text-xl transition duration-300 relative font-bold">
+            Home
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-orange-400 transform scale-x-0 transition-transform duration-300 origin-left"></span>
+          </a>
+          <button class="ml-2 flex items-center mr-4 text-white hover:text-green-400 hover:text-xl transition duration-300 relative font-bold hover:font-extrabold">
+            <span class="mr-1 menu-button">Menu</span>
+            <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M6 8l4 4 4-4"></path>
+            </svg>
+          </button>
+          <a href="#" class="mr-4 text-white hover:text-white-400 transition duration-300 relative font-bold hover:font-extrabold hover:bg-gradient-to-t">
+            Deals
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-orange-400 hover:text-xl transform scale-x-0 transition-transform duration-300 origin-left"></span>
+          </a>
+          <a href="#" class="mr-4 text-white hover:text-orange-400 hover:text-xl transition duration-300 relative font-bold hover:font-extrabold">
+            About
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-orange-400  transform scale-x-0 transition-transform duration-300 origin-left"></span>
+          </a>
+          <a href="#" class="mr-4 text-white hover:text-orange-400 hover:text-xl transition duration-300 relative font-bold hover:font-extrabold">
+            Contact
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-orange-400  transform scale-x-0 transition-transform duration-300 origin-left"></span>
+          </a>
+        </div>
+        <div class="hidden sm:flex sm:items-center">
+          <a href="#" class="btn btn-primary">Order Now</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="menu mt-16">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-center mb-10">
+        <h2 class="text-3xl font-bold">Our Menu</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-lg shadow-lg">
+          <img src="Image library/pizza-1.jpg" alt="Pizza" class="rounded-t-lg w-full">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Margherita</h3>
+            <p class="text-gray-700">Classic cheese pizza topped with tomato sauce, mozzarella, and fresh basil.</p>
+            <div class="flex justify-between items-center mt-4">
+              <span class="font-bold text-lg">$12.99</span>
+              <a href="#" class="bg-orange-500 hover:bg-orange-400 text-white px-4 py-2 rounded-full font-bold">Order</a>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg">
+          <img src="Image library/pizza-2.jpg" alt="Pizza" class="rounded-t-lg w-full">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Pepperoni</h3>
+            <p class="text-gray-700">Classic pizza topped with tomato sauce, mozzarella, and pepperoni slices.</p>
+            <div class="flex justify-between items-center mt-4">
+              <span class="font-bold text-lg">$14.99</span>
+              <a href="#" class="bg-orange-500 hover:bg-orange-400 text-white px-4 py-2 rounded-full font-bold">Order</a>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg">
+          <img src="Image library/pizza-3.jpg" alt="Pizza" class="rounded-t-lg w-full">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Supreme</h3>
+            <p class="text-gray-700">Delicious pizza topped with tomato sauce, mozzarella, pepperoni, mushrooms, onions, and bell peppers.</p>
+            <div class="flex justify-between items-center mt-4">
+              <span class="font-bold text-lg">$16.99</span>
+              <a href="#" class="bg-orange-500 hover:bg-orange-400 text-white px-4 py-2 rounded-full font-bold">Order</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="deals py-16">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-center mb-10">
+        <h2 class="text-3xl font-bold">Special Deals</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-lg shadow-lg">
+          <img src="Image library/deal-1.jpg" alt="Deal" class="rounded-t-lg w-full">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Family Pack</h3>
+            <p class="text-gray-700">Get 2 large pizzas, 1 side, and 2 drinks for only $29.99.</p>
+            <div class="flex justify-between items-center mt-4">
+              <a href="#" class="bg-orange-500 hover:bg-orange-400 text-white px-4 py-2 rounded-full font-bold">Order</a>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg">
+          <img src="Image library/deal-2.jpg" alt="Deal" class="rounded-t-lg w-full">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Lunch Special</h3>
+            <p class="text-gray-700">Enjoy a personal pizza with a side and a drink for only $9.99.</p>
+            <div class="flex justify-between items-center mt-4">
+              <a href="#" class="bg-orange-500 hover:bg-orange-400 text-white px-4 py-2 rounded-full font-bold">Order</a>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg">
+          <img src="Image library/deal-3.jpg" alt="Deal" class="rounded-t-lg w-full">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Party Pack</h3>
+            <p class="text-gray-700">Get 4 large pizzas, 2 sides, and 4 drinks for only $49.99.</p>
+            <div class="flex justify-between items-center mt-4">
+              <a href="#" class="bg-orange-500 hover:bg-orange-400 text-white px-4 py-2 rounded-full font-bold">Order</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-gray-900 text-white py-10">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="space-y-4">
+          <h3 class="text-lg font-bold">About Us</h3>
+          <p class="text-gray-400">Pizza-E is a leading pizza restaurant specializing in delicious and freshly made pizzas.</p>
+        </div>
+        <div class="space-y-4">
+          <h3 class="text-lg font-bold">Menu</h3>
+          <ul class="text-gray-400">
+            <li><a href="#" class="hover:text-white">Margherita</a></li>
+            <li><a href="#" class="hover:text-white">Pepperoni</a></li>
+            <li><a href="#" class="hover:text-white">Supreme</a></li>
+          </ul>
+        </div>
+        <div class="space-y-4">
+          <h3 class="text-lg font-bold">Deals</h3>
+          <ul class="text-gray-400">
+            <li><a href="#" class="hover:text-white">Family Pack</a></li>
+            <li><a href="#" class="hover:text-white">Lunch Special</a></li>
+            <li><a href="#" class="hover:text-white">Party Pack</a></li>
+          </ul>
+        </div>
+        <div class="space-y-4">
+          <h3 class="text-lg font-bold">Contact Us</h3>
+          <p class="text-gray-400">123 Pizza Street, City</p>
+          <p class="text-gray-400">Phone: 123-456-7890</p>
+          <p class="text-gray-400">Email: info@pizzae.com</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-8">
+      <p class="text-gray-400">© 2023 Pizza-E. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

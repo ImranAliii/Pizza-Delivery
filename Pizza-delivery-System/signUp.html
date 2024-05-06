@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="image library/pngegg.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.tailwindcss.com/2.2.7/tailwind.min.css">
+  <title>SignUp - Pizza-E</title>
+  <style>
+    /* Custom styles specific to the login page can be added here */
+    body {
+      background-image: url("image library/LoginBG.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed; /* Keeps the background fixed while scrolling */
+    }
+    .form-input {
+      padding: 15px; /* Increased padding */
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 10px; /* Increased border radius */
+      margin-bottom: 15px; /* Increased margin */
+      font-size: 1.2rem; /* Increased font size */
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: #FF5733;
+    }
+    .btn-login, .btn-signup {
+      background-color: #FF5733;
+      color: white;
+      padding: 15px 30px; /* Increased padding */
+      border: none;
+      border-radius: 10px; /* Increased border radius */
+      cursor: pointer;
+      font-size: 1.2rem; /* Increased font size */
+    }
+    .btn-login:hover, .btn-signup:hover {
+      background-color: #FF4500;
+    }
+    .text-yellow {
+      color: yellow;
+    }
+    .text-orange {
+      color: rgb(255, 142, 67);
+    }
+    .text-blu {
+      color: rgb(129, 230, 255);
+    }
+    .text-center-middle {
+      text-align: center;
+    }
+    .font-foodie {
+      font-family: 'Your-Foodie-Font', cursive;
+      font-size: 2.4rem; /* Increased font size */
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 35vh; /* Set the minimum height to 100% of the viewport height */
+      max-width: 100%; /* Ensure content doesn't exceed the viewport width */
+    }
+
+   
+    
+  </style>
+    <script>
+
+    </script>
+    
+</head>
+<body>
+  <section class="upper-section text-center-middle py-16 background: body">
+    <div class="container mx-auto px-4">
+     
+    </div>
+  </section>
+
+  <section class="signup  py-16">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-center mb-10">
+        <h2 class="text-3xl text-center-middle font-foodie text-yellow">Signup</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <!-- Login Form -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <h3 class="text-xl font-bold mb-4 text-orange">Signup</h3>
+          <form id="signup-form">
+
+            <div class="mb-4">
+              <label for="email" class="block text-blu font-bold">Email</label>
+              <input type="email" id="email" class="form-input" placeholder="Your email" required>
+            </div>
+            <div class="mb-4">
+              <label for ="password" class="block text-blu font-bold">Password</label>
+              <input type="password" id="password" class="form-input" placeholder="Your password" required>
+            </div>
+            <div class="mb-4">
+                <button id="btn-signup" class="btn-signup" >Signup</a></button>
+              
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center py-4">
+    <p class="text-gray-400">© 2023 Pizza-E. All rights reserved.</p>
+  </footer>
+
+
+</body>
+</html>
+<script>
+  document.getElementById('signup-form').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    try {
+      const response = await fetch('http://localhost:5000/create-user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if(data.status === true){
+          window.location.href = 'index.html'
+
+        }
+        else
+        alert(data.message); // Display a success message
+      } else {
+        const data = await response.json();
+        alert(data.message); // Display an error message
+      }
+    } catch (error) {
+      console.error(error);
+      alert('An error occurred. Please try again.'); // Display a generic error message
+    }
+  });
+ 
+</script>
